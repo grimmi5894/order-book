@@ -14,6 +14,15 @@ const reconcileOrder = (existingBook, incomingOrder) => {
 
       return existingBook
     }
+    else if ((incomingOrder.type !== existingBook[i].type) &&
+      (incomingOrder.price === existingBook[i].price) &&
+      (incomingOrder.quantity < existingBook[i].quantity)) {
+      existingBook[i].quantity -= incomingOrder.quantity
+      existingBook.push(existingBook[i])
+      existingBook.splice(i, 1), i--
+
+      return existingBook
+    }
   }
   // adds an order to the book when the book has orders of the corresponding type (i.e. a sell with no buys)
   // adds an order to the book when the book has a corresponding order type but it does not match
